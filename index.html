@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Isla · Versiones</title>
+<meta name="description" content="Versiones de la landing de La Isla para revisión.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital,wght@0,400;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--crema:#F7F0E6;--lino:#FAF5ED;--beige:#F1E7DB;--arena:#E8D9BE;--salvia:#8FC6B7;--verde:#356B5F;--verde-2:#24493F;--tierra:#1D3933;--tierra-2:#132C27;--coral:#FF8F80;--coral-2:#E8705F;--terracota:#A65A44;--tinta:#2A2320;--tinta-2:#5E564E;--claro:#F7EFE4;--display:'Cormorant Garamond',Georgia,serif;--serif:'Lora',Georgia,serif;--sans:'Nunito Sans',system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--crema);color:var(--tinta);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  a:focus-visible{outline:2.5px solid var(--coral-2);outline-offset:4px;border-radius:6px}
+  .wrap{width:min(1080px,calc(100% - 44px));margin:0 auto}
+  header{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(2rem,4vw,3rem)}
+  .eyebrow{font:italic 400 1rem var(--serif);color:var(--verde);margin-bottom:.8rem}
+  h1{font:500 clamp(3rem,2rem + 4vw,5rem)/1.02 var(--display);color:var(--verde-2);letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--verde)}
+  .intro{max-width:58ch;margin-top:1.2rem;color:var(--tinta-2)}
+  .versions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;padding-bottom:clamp(3rem,7vw,5rem)}
+  .version{position:relative;display:flex;flex-direction:column;min-height:220px;padding:1.6rem;background:var(--lino);border:1px solid rgba(53,107,95,.18);border-radius:18px;text-decoration:none;transition:transform .2s ease,border-color .2s ease}
+  .version:hover{transform:translateY(-3px);border-color:rgba(53,107,95,.45)}
+  .version.current{background:var(--beige);border-color:rgba(53,107,95,.35)}
+  .tag{display:inline-block;align-self:flex-start;margin-bottom:auto;padding:.32rem .65rem;border-radius:999px;background:var(--coral);color:#2E1710;font:800 .64rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+  .version h2{font:600 clamp(1.8rem,1.4rem + 1vw,2.4rem)/1.05 var(--display);color:var(--verde-2);margin:1.4rem 0 .5rem}
+  .version p{font-size:.92rem;color:var(--tinta-2);margin-bottom:1.2rem}
+  .open{display:inline-flex;align-items:center;gap:.4rem;margin-top:auto;font-weight:800;font-size:.78rem;letter-spacing:.08em;color:var(--verde)}
+  .open::after{content:"→"}
+  .proto{padding:clamp(2rem,4vw,3rem) 0 clamp(3rem,6vw,5rem);border-top:1px solid rgba(53,107,95,.22)}
+  .proto h2{font:500 clamp(1.7rem,1.4rem + 1vw,2.3rem)/1.1 var(--display);color:var(--verde-2);margin-bottom:.8rem}
+  .proto p{color:var(--tinta-2);margin-bottom:1.2rem;max-width:58ch}
+  .proto-links{display:flex;flex-wrap:wrap;gap:.6rem}
+  .proto-links a{padding:.65rem 1rem;border:1px solid rgba(53,107,95,.3);border-radius:999px;text-decoration:none;font-size:.82rem;font-weight:700;color:var(--verde-2);transition:background .2s ease}
+  .proto-links a:hover{background:var(--lino)}
+  footer{padding:1.4rem 0 2.4rem;border-top:1px solid rgba(53,107,95,.22);font-size:.78rem;color:var(--tinta-2)}
+  @media(max-width:720px){.versions{grid-template-columns:1fr}.version{min-height:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">La Isla · Iraia Ibañez</p>
+    <h1>Versiones de la <em>landing.</em></h1>
+    <p class="intro">Versiones para revisión. La v4 es la mezcla actual de v2 y v3; las anteriores se conservan como referencia.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="versions" aria-label="Versiones de la landing">
+    <a class="version current" href="v4/la-isla.html" target="_blank" rel="noopener">
+      <span class="tag">Actual</span>
+      <h2>v4 · Mezcla</h2>
+      <p>Diseño v2 y v3 sección a sección, con el ancho y el rendimiento de la v3.</p>
+      <span class="open">Abrir v4</span>
+    </a>
+    <a class="version" href="v3/la-isla.html" target="_blank" rel="noopener">
+      <span class="tag" style="background:var(--salvia)">v3</span>
+      <h2>Bitácora editorial</h2>
+      <p>Rediseño completo con grid editorial, notas de margen y nuevas composiciones.</p>
+      <span class="open">Abrir v3</span>
+    </a>
+    <a class="version" href="la-isla.html" target="_blank" rel="noopener">
+      <span class="tag" style="background:var(--terracota);color:var(--claro)">v2</span>
+      <h2>Versión anterior</h2>
+      <p>La versión de la que partimos, con sus bloques originales y su ancho de 1120 px.</p>
+      <span class="open">Abrir v2</span>
+    </a>
+    <a class="version" href="v1/La%20Isla%20%C2%B7%20Landing%20de%20Iraia%20Iban%CC%83ez.html" target="_blank" rel="noopener">
+      <span class="tag" style="background:var(--arena, #E8D9BE);color:var(--tinta)">v1</span>
+      <h2>Primera versión</h2>
+      <p>La referencia inicial, guardada tal como se entregó.</p>
+      <span class="open">Abrir v1</span>
+    </a>
+  </section>
+
+  <section class="proto" aria-label="Prototipos de la v3">
+    <h2>Prototipos v3</h2>
+    <p>Las exploraciones que sirvieron para elegir hero, mapa y oferta. Se conservan solo como referencia.</p>
+    <div class="proto-links">
+      <a href="v3/prototype-hero.html?variant=A" target="_blank" rel="noopener">Hero · A</a>
+      <a href="v3/prototype-map.html?variant=A" target="_blank" rel="noopener">Mapa · A</a>
+      <a href="v3/prototype-offer.html?variant=A" target="_blank" rel="noopener">Oferta · A</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">La Isla · versiones de revisión · 2026</div>
+</footer>
+</body>
+</html>
