@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--
+  PROTOTIPO · Hero v3 · 3 variantes
+  Pregunta: ¿qué composición debe abrir la v3?
+  A = Portada editorial (elegida: eyebrow sobre el titular) · B = Cartel · C = Panel de tierra
+  Temporal. No es producción.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prototipo hero · La Isla v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Lora:ital,wght@0,400;1,400;1,500&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root{
+    --p-max:1280px;
+    --p-gutter:clamp(22px,5vw,80px);
+    --p-grid:clamp(20px,2.4vw,36px);
+  }
+  html{scroll-behavior:auto}
+  body{background:var(--crema);padding-bottom:5rem}
+
+  .p-wrap{width:min(var(--p-max),calc(100% - 2 * var(--p-gutter)));margin-inline:auto}
+  .nav .wrap{width:min(var(--p-max),calc(100% - 2 * var(--p-gutter)))}
+
+  .p-hero{position:relative;overflow:hidden;padding:clamp(2.6rem,5.5vw,5rem) 0 clamp(3rem,6vw,5.5rem)}
+  .p-h1{font-family:var(--display);font-weight:500;line-height:1.03;letter-spacing:-.012em;color:var(--verde-2);margin:0 0 1.2rem}
+  .p-h1 em{font-style:italic;color:var(--verde)}
+  .p-lead{font-family:var(--serif);font-style:italic;font-size:clamp(1.22rem,1.05rem + .6vw,1.55rem);line-height:1.42;color:var(--verde);margin:0 0 1.1rem}
+  .p-lead strong{font-weight:400;color:inherit}
+  .p-body{max-width:56ch;color:var(--tinta)}
+  .p-sin{margin:1.2rem 0 1.8rem;padding-left:1rem;border-left:2px solid var(--salvia);font-family:var(--serif);font-style:italic;color:var(--verde-2)}
+  .p-actions{display:flex;align-items:center;flex-wrap:wrap;gap:1rem 1.4rem;margin-top:1.6rem}
+  .p-price{font-size:.92rem;color:var(--tinta-2)}
+  .p-price strong{color:var(--tinta)}
+
+  .p-frame{position:relative;background:var(--lino);padding:6px;border-radius:10px;overflow:hidden;box-shadow:0 40px 70px -45px rgba(29,57,51,.7)}
+  .p-frame img{display:block;width:100%;height:100%;object-fit:cover;border-radius:6px}
+  .p-arch{aspect-ratio:4/5.2;border-radius:999px 999px 16px 16px}
+  .p-arch img{border-radius:999px 999px 10px 10px}
+
+  .p-micro{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-top:1.4rem;font-size:.85rem;font-weight:700;color:var(--verde)}
+  .p-micro span{display:inline-flex;align-items:center;gap:.45rem}
+  .p-micro svg{width:18px;height:18px}
+  .p-proofs{grid-column:1/13;display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;border-top:1px solid rgba(53,107,95,.22);margin-top:clamp(2.4rem,5vw,4rem);padding-top:1rem;font-size:.85rem;font-weight:700;color:var(--verde)}
+  .p-proofs span{display:inline-flex;align-items:center;gap:.45rem}
+  .p-proofs svg{width:18px;height:18px}
+
+  .hero-variant{display:none}
+  body[data-variant="A"] .hero-variant[data-variant="A"],
+  body[data-variant="B"] .hero-variant[data-variant="B"],
+  body[data-variant="C"] .hero-variant[data-variant="C"]{display:block}
+
+  /* A · Portada editorial */
+  .p-a{background:var(--beige)}
+  .p-a-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--p-grid);align-items:start}
+  .p-b-note .eyebrow{display:block;margin:0;max-width:15ch;font-size:.98rem;line-height:1.35}
+  .p-b-note .eyebrow::before{display:block;margin-bottom:.55rem}
+  .p-a-copy{grid-column:1/9}
+  .p-a-copy .p-h1{font-size:clamp(3.4rem,2.05rem + 5vw,6.2rem);max-width:14ch}
+  .p-a-copy .p-body{max-width:56ch}
+  .p-a-photo{grid-column:9/13;margin-right:calc(-1 * var(--p-gutter));padding-top:clamp(.5rem,3vw,3rem);align-self:stretch}
+  .p-a-photo .p-frame{height:100%;min-height:520px;aspect-ratio:auto}
+  .p-a-proofs{grid-column:1/13}
+
+  /* B · Cartel */
+  .p-b{background:var(--crema)}
+  .p-b-top{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--p-grid);align-items:start;margin-bottom:clamp(1.8rem,4vw,3rem)}
+  .p-b-note{grid-column:1/3;padding-top:.35rem}
+  .p-b-title{grid-column:3/13}
+  .p-b-title .p-h1{font-size:clamp(4rem,2.3rem + 6.4vw,7.2rem);max-width:13ch;margin-bottom:0}
+  .p-b-photo{width:100vw;margin-left:calc(50% - 50vw);margin-top:clamp(1.8rem,4vw,3rem);aspect-ratio:16/7;border-radius:10px}
+  .p-b-photo img{object-position:50% 55%}
+  .p-b-bottom{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--p-grid);margin-top:clamp(2rem,4vw,3.5rem);align-items:start}
+  .p-b-copy{grid-column:1/8}
+  .p-b-action{grid-column:9/13;border-left:1px solid rgba(53,107,95,.22);padding-left:clamp(1.2rem,2vw,2rem)}
+  .p-b-action .btn{margin-bottom:.9rem}
+  .p-b-action .p-micro{flex-direction:column;align-items:flex-start;gap:.55rem;margin-top:1.2rem}
+
+  /* C · Panel de tierra */
+  .p-c{background:var(--crema);padding:0}
+  .p-c-grid{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(620px,78vh,820px)}
+  .p-c-copy{display:flex;align-items:center;justify-content:flex-end;padding:clamp(2.8rem,6vw,5.5rem) clamp(1.6rem,4vw,4rem) clamp(2.5rem,5vw,4rem) max(var(--p-gutter),calc((100vw - var(--p-max))/2));}
+  .p-c-copy-inner{width:100%;max-width:620px}
+  .p-c-copy .p-h1{font-size:clamp(3rem,1.8rem + 4vw,5.6rem);max-width:11ch}
+  .p-c-copy .p-body{max-width:52ch}
+  .p-c-micros{border-top:1px solid rgba(53,107,95,.22);margin-top:2rem;padding-top:1rem;display:grid;gap:.55rem;font-size:.85rem;font-weight:700;color:var(--verde)}
+  .p-c-micros span{display:inline-flex;align-items:center;gap:.45rem}
+  .p-c-micros svg{width:18px;height:18px}
+  .p-c-panel{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(2rem,5vw,5rem);background:var(--tierra)}
+  .p-c-panel::before{content:"";position:absolute;inset:0;background-image:var(--papel);opacity:.55;pointer-events:none}
+  .p-c-photo{position:relative;z-index:1;width:min(360px,80%);height:100%;max-height:560px;min-height:380px}
+
+  /* Switcher */
+  .p-switcher{position:fixed;left:50%;bottom:18px;z-index:200;transform:translateX(-50%);display:flex;align-items:center;gap:.35rem;padding:.4rem .5rem;border:1px solid rgba(247,239,228,.18);border-radius:999px;background:var(--tierra-2);color:var(--claro);box-shadow:0 18px 40px -18px rgba(19,44,39,.7);font:700 .75rem/1 var(--sans);letter-spacing:.04em}
+  .p-switcher button{width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:inherit;font:inherit;font-size:1rem;cursor:pointer}
+  .p-switcher button:hover{background:rgba(247,239,228,.12)}
+  .p-switcher button:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+  .p-label{min-width:158px;text-align:center;white-space:nowrap}
+  .p-tag{margin-left:.55rem;color:var(--salvia);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+
+  @media(max-width:1000px){
+    .p-a-grid{grid-template-columns:repeat(8,1fr)}
+    .p-a-copy{grid-column:1/6}
+    .p-a-photo{grid-column:6/9;margin-right:calc(-1 * var(--p-gutter));padding-top:0}
+    .p-a-photo .p-frame{min-height:0;height:auto;aspect-ratio:4/5.2}
+    .p-a-proofs{grid-column:1/9}
+  }
+
+  @media(max-width:900px){
+    .p-a-grid,.p-b-top,.p-b-bottom{display:flex;flex-direction:column;gap:var(--p-grid)}
+    .p-a-copy,.p-a-photo,.p-a-proofs,.p-b-note,.p-b-title,.p-b-copy,.p-b-action{width:100%;grid-column:auto}
+    .p-b-note{margin-bottom:.4rem}
+    .p-a-photo{margin:2rem 0 0;padding-top:0}
+    .p-a-photo .p-frame{aspect-ratio:4/5.2}
+    .p-a-copy .p-h1,.p-b-title .p-h1{max-width:none}
+    .p-b-title .p-h1{font-size:clamp(3.4rem,2.1rem + 6vw,5.8rem)}
+    .p-b-photo{aspect-ratio:4/3}
+    .p-b-bottom{gap:2rem}
+    .p-b-action{border-left:0;border-top:1px solid rgba(53,107,95,.22);padding-left:0;padding-top:1.2rem}
+    .p-c-grid{grid-template-columns:1fr;min-height:0}
+    .p-c-copy{justify-content:flex-start;padding:clamp(2.4rem,6vw,4rem) var(--p-gutter)}
+    .p-c-copy-inner{max-width:none}
+    .p-c-panel{min-height:560px;padding:clamp(2rem,6vw,3.5rem) var(--p-gutter)}
+    .p-c-photo{width:min(340px,80%);max-height:520px}
+  }
+
+  @media(max-width:520px){
+    .p-switcher{bottom:12px;font-size:.68rem}
+    .p-switcher button{width:30px;height:30px}
+    .p-label{min-width:137px}
+    .p-tag{display:none}
+    .p-c-panel{min-height:480px}
+    .p-c-photo{width:min(290px,82%)}
+    .p-b-photo{aspect-ratio:1/1}
+  }
+</style>
+</head>
+<body data-variant="A">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-barra" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 14h30M9 14v20M31 14v20M5 34h8M27 34h8"/></g></symbol>
+    <symbol id="i-casa" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19L20 8l14 11"/><path d="M10 16v17h20V16"/><path d="M15 33c0-5 2.5-8 5-8s5 3 5 8"/></g></symbol>
+    <symbol id="i-ritmo" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 22c4-8 8-8 12 0s8 8 12 0 6-6 8-3"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio">LA ISLA</a>
+    <nav aria-label="Navegación">
+      <a href="#iraia">Iraia</a><a href="#mapa">El método</a><a href="#incluye">Qué incluye</a><a href="#faq">Preguntas</a>
+      <a class="btn" href="#oferta">Quiero ir a La Isla →</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- A · PORTADA EDITORIAL -->
+<section class="hero-variant p-hero p-a" data-variant="A">
+  <div class="p-wrap p-a-grid">
+    <div class="p-a-copy">
+      <p class="eyebrow">Membresía online de Barre para mujeres</p>
+      <h1 class="p-h1">Pon rumbo a un cuerpo fuerte, ágil y <em>conectado contigo.</em></h1>
+      <p class="p-lead"><strong>Descubre una forma de entrenar a la que quieras volver.</strong></p>
+      <p class="p-body">La Isla es una membresía online donde entrenas con un propósito y sigues una ruta clara, sin improvisar. A través del Barre y la técnica del ballet trabajarás la fuerza, el control y la precisión para fortalecer tu cuerpo, ganar confianza y disfrutar del camino.</p>
+      <p class="p-sin">Sin perderte entre cientos de rutinas. Sin empezar de cero cada vez que pierdes el ritmo.</p>
+      <div class="p-actions">
+        <a class="btn" href="#oferta">QUIERO IR A LA ISLA →</a>
+        <p class="p-price"><strong>27 €/mes</strong> · Precio de lanzamiento (habitual: 39 €/mes)</p>
+      </div>
+    </div>
+    <div class="p-a-photo">
+      <figure class="p-frame p-arch">
+        <img alt="Entrenamiento Barre en La Isla" data-foto="hero" src="https://assets.cdn.filesafe.space/U0COlZxzbxKZEOV1jhRE/media/6ac7b9ccbbad531ac83313fa.png">
+      </figure>
+    </div>
+    <div class="p-proofs">
+      <span><svg aria-hidden="true"><use href="#i-barra"/></svg>Barre con técnica real</span>
+      <span><svg aria-hidden="true"><use href="#i-casa"/></svg>Desde casa</span>
+      <span><svg aria-hidden="true"><use href="#i-ritmo"/></svg>A tu ritmo</span>
+    </div>
+  </div>
+</section>
+
+<!-- B · CARTEL -->
+<section class="hero-variant p-hero p-b" data-variant="B">
+  <div class="p-wrap">
+    <div class="p-b-top">
+      <div class="p-b-note">
+        <p class="eyebrow">Membresía online de Barre para mujeres</p>
+      </div>
+      <div class="p-b-title">
+        <h1 class="p-h1">Pon rumbo a un cuerpo fuerte, ágil y <em>conectado contigo.</em></h1>
+      </div>
+    </div>
+    <figure class="p-b-photo p-frame">
+      <img alt="Entrenamiento Barre en La Isla" data-foto="hero" src="https://assets.cdn.filesafe.space/U0COlZxzbxKZEOV1jhRE/media/6ac7b9ccbbad531ac83313fa.png">
+    </figure>
+    <div class="p-b-bottom">
+      <div class="p-b-copy">
+        <p class="p-lead"><strong>Descubre una forma de entrenar a la que quieras volver.</strong></p>
+        <p class="p-body">La Isla es una membresía online donde entrenas con un propósito y sigues una ruta clara, sin improvisar. A través del Barre y la técnica del ballet trabajarás la fuerza, el control y la precisión para fortalecer tu cuerpo, ganar confianza y disfrutar del camino.</p>
+        <p class="p-sin">Sin perderte entre cientos de rutinas. Sin empezar de cero cada vez que pierdes el ritmo.</p>
+      </div>
+      <div class="p-b-action">
+        <a class="btn" href="#oferta">QUIERO IR A LA ISLA →</a>
+        <p class="p-price"><strong>27 €/mes</strong> · Precio de lanzamiento (habitual: 39 €/mes)</p>
+        <div class="p-micro">
+          <span><svg aria-hidden="true"><use href="#i-barra"/></svg>Barre con técnica real</span>
+          <span><svg aria-hidden="true"><use href="#i-casa"/></svg>Desde casa</span>
+          <span><svg aria-hidden="true"><use href="#i-ritmo"/></svg>A tu ritmo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- C · PANEL DE TIERRA -->
+<section class="hero-variant p-hero p-c" data-variant="C">
+  <div class="p-c-grid">
+    <div class="p-c-copy">
+      <div class="p-c-copy-inner">
+        <p class="eyebrow">Membresía online de Barre para mujeres</p>
+        <h1 class="p-h1">Pon rumbo a un cuerpo fuerte, ágil y <em>conectado contigo.</em></h1>
+        <p class="p-lead"><strong>Descubre una forma de entrenar a la que quieras volver.</strong></p>
+        <p class="p-body">La Isla es una membresía online donde entrenas con un propósito y sigues una ruta clara, sin improvisar. A través del Barre y la técnica del ballet trabajarás la fuerza, el control y la precisión para fortalecer tu cuerpo, ganar confianza y disfrutar del camino.</p>
+        <p class="p-sin">Sin perderte entre cientos de rutinas. Sin empezar de cero cada vez que pierdes el ritmo.</p>
+        <div class="p-actions">
+          <a class="btn" href="#oferta">QUIERO IR A LA ISLA →</a>
+          <p class="p-price"><strong>27 €/mes</strong> · Precio de lanzamiento (habitual: 39 €/mes)</p>
+        </div>
+        <div class="p-c-micros">
+          <span><svg aria-hidden="true"><use href="#i-barra"/></svg>Barre con técnica real</span>
+          <span><svg aria-hidden="true"><use href="#i-casa"/></svg>Desde casa</span>
+          <span><svg aria-hidden="true"><use href="#i-ritmo"/></svg>A tu ritmo</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-c-panel">
+      <figure class="p-frame p-arch p-c-photo">
+        <img alt="Entrenamiento Barre en La Isla" data-foto="hero" src="https://assets.cdn.filesafe.space/U0COlZxzbxKZEOV1jhRE/media/6ac7b9ccbbad531ac83313fa.png">
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="p-switcher" role="group" aria-label="Variantes del prototipo de hero">
+  <button type="button" data-prev aria-label="Variante anterior">←</button>
+  <span class="p-label" data-variant-label aria-live="polite">A · Portada editorial</span>
+  <button type="button" data-next aria-label="Variante siguiente">→</button>
+  <span class="p-tag">Prototipo</span>
+</div>
+
+<script src="js/image-fallback.js"></script>
+<script>
+(function(){
+  var names={A:'Portada editorial',B:'Cartel',C:'Panel de tierra'};
+  var order=['A','B','C'];
+  var params=new URLSearchParams(window.location.search);
+  var current=(params.get('variant')||'A').toUpperCase();
+  if(!names[current]) current='A';
+
+  function render(){
+    document.body.dataset.variant=current;
+    document.querySelector('[data-variant-label]').textContent=current+' · '+names[current];
+    var url=new URL(window.location.href);
+    url.searchParams.set('variant',current);
+    window.history.replaceState({},'',url);
+    document.title='Prototipo hero · '+current+' · La Isla v3';
+  }
+  function step(dir){
+    var i=order.indexOf(current);
+    current=order[(i+dir+order.length)%order.length];
+    render();
+  }
+
+  document.querySelector('[data-prev]').addEventListener('click',function(){step(-1);});
+  document.querySelector('[data-next]').addEventListener('click',function(){step(1);});
+  document.addEventListener('keydown',function(e){
+    var t=e.target;
+    if(t && (t.matches('input, textarea, [contenteditable="true"]'))) return;
+    if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}
+    if(e.key==='ArrowRight'){e.preventDefault();step(1);}
+  });
+  render();
+})();
+</script>
+</body>
+</html>

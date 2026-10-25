@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--
+  PROTOTIPO · Oferta v3 · 3 variantes
+  Pregunta: ¿cómo debe presentarse la membresía sin perder claridad?
+  A = Mesa de expedición (elegida) · B = Carta de membresía · C = Paisaje inmersivo
+  Temporal. No es producción.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prototipo oferta · La Isla v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Lora:ital,wght@0,400;1,400;1,500&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root{--p-max:1280px;--p-gutter:clamp(22px,5vw,80px);--p-grid:clamp(20px,2.4vw,36px)}
+  html{scroll-behavior:auto}
+  body{background:var(--crema);padding-bottom:5rem}
+  .p-wrap{width:min(var(--p-max),calc(100% - 2 * var(--p-gutter)));margin-inline:auto}
+  .nav .wrap{width:min(var(--p-max),calc(100% - 2 * var(--p-gutter)))}
+
+  .p-offer{position:relative;overflow:hidden;padding:clamp(5rem,10vw,9rem) 0;background:#F3E8D8}
+  .p-offer-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .p-offer-art svg{display:block;width:100%;height:100%}
+  .p-offer-inner{position:relative;z-index:2}
+
+  .p-offer-head .eyebrow{color:var(--verde)}
+  .p-offer-head h2{font-family:var(--display);font-weight:500;line-height:1.04;letter-spacing:-.01em;color:var(--verde-2);margin:0 0 1.2rem;font-size:clamp(2.6rem,1.7rem + 3.5vw,4.4rem)}
+  .p-offer-head h2 em{font-style:italic;color:var(--verde)}
+  .p-offer-head p{max-width:56ch;margin:0;color:var(--tinta)}
+
+  .p-offer-card{position:relative}
+  .p-offer-card .tipo{color:var(--verde)}
+  .p-offer-card .pill{color:var(--btn-text)}
+  .p-offer-card .price{color:var(--tierra)}
+  .p-offer-card .habitual{color:var(--tinta-2)}
+  .p-offer-card .fine{color:var(--tinta-2)}
+
+  /* A · Mesa de expedición */
+  body[data-variant="A"] .p-offer::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(247,240,230,.78) 0%,rgba(247,240,230,.3) 40%,rgba(247,240,230,.08) 100%)}
+  body[data-variant="A"] .p-offer-head{max-width:720px;margin:0 auto 2.4rem;text-align:center}
+  body[data-variant="A"] .p-offer-head h2{max-width:15ch;margin-left:auto;margin-right:auto}
+  body[data-variant="A"] .p-offer-head p{margin-left:auto;margin-right:auto}
+  body[data-variant="A"] .p-offer-card{max-width:540px;margin:0 auto}
+
+  /* B · Carta de membresía */
+  body[data-variant="B"] .p-offer{background:var(--crema)}
+  body[data-variant="B"] .p-offer-art{inset:0}
+  body[data-variant="B"] .p-offer::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--crema) 0%,rgba(247,240,230,.92) 38%,rgba(247,240,230,.35) 58%,rgba(247,240,230,.05) 100%)}
+  body[data-variant="B"] .p-offer-inner{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--p-grid);align-items:start}
+  body[data-variant="B"] .p-offer-head{grid-column:1/6;margin:0;text-align:left}
+  body[data-variant="B"] .p-offer-head h2{max-width:10ch}
+  body[data-variant="B"] .p-offer-head p{max-width:40ch}
+  body[data-variant="B"] .p-offer-card{grid-column:6/13;max-width:none;margin:0;text-align:left}
+
+  /* C · Paisaje inmersivo */
+  body[data-variant="C"] .p-offer{background:var(--tierra)}
+  body[data-variant="C"] .p-offer::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(247,240,230,.96) 0%,rgba(247,240,230,.82) 38%,rgba(247,240,230,0) 68%),linear-gradient(180deg,rgba(247,240,230,.9) 0%,rgba(247,240,230,.25) 35%,rgba(247,240,230,0) 60%)}
+  body[data-variant="C"] .p-offer-head{max-width:620px;margin:0;text-align:left}
+  body[data-variant="C"] .p-offer-head h2{max-width:12ch}
+  body[data-variant="C"] .p-offer-head p{max-width:48ch}
+  body[data-variant="C"] .p-offer-card{max-width:1000px;margin:clamp(3rem,6vw,5rem) 0 0 auto;text-align:left;
+    display:grid;grid-template-columns:.85fr 1.15fr;grid-template-areas:
+      "tipo benefits"
+      "pill benefits"
+      "price benefits"
+      "habitual benefits"
+      "action action"
+      "fine fine";
+    column-gap:clamp(1.5rem,3vw,3rem);row-gap:.45rem}
+  body[data-variant="C"] .p-offer-card .tipo{grid-area:tipo}
+  body[data-variant="C"] .p-offer-card .pill{grid-area:pill;justify-self:start}
+  body[data-variant="C"] .p-offer-card .price{grid-area:price;margin-top:.7rem}
+  body[data-variant="C"] .p-offer-card .habitual{grid-area:habitual;margin-top:.2rem}
+  body[data-variant="C"] .p-offer-card ul{grid-area:benefits;margin:0;padding:0}
+  body[data-variant="C"] .p-offer-card .btn{grid-area:action;width:100%;margin-top:1.6rem}
+  body[data-variant="C"] .p-offer-card .fine{grid-area:fine;text-align:left}
+
+  .p-switcher{position:fixed;left:50%;bottom:18px;z-index:200;transform:translateX(-50%);display:flex;align-items:center;gap:.35rem;padding:.4rem .5rem;border:1px solid rgba(247,239,228,.18);border-radius:999px;background:var(--tierra-2);color:var(--claro);box-shadow:0 18px 40px -18px rgba(19,44,39,.7);font:700 .75rem/1 var(--sans);letter-spacing:.04em}
+  .p-switcher button{width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:inherit;font:inherit;font-size:1rem;cursor:pointer}
+  .p-switcher button:hover{background:rgba(247,239,228,.12)}
+  .p-switcher button:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+  .p-label{min-width:160px;text-align:center;white-space:nowrap}
+  .p-tag{margin-left:.55rem;color:var(--salvia);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+
+  @media(max-width:900px){
+    body[data-variant="A"] .p-offer-head,
+    body[data-variant="B"] .p-offer-head,
+    body[data-variant="C"] .p-offer-head{max-width:none;margin:0 0 2rem;text-align:left}
+    body[data-variant="A"] .p-offer-head h2,
+    body[data-variant="B"] .p-offer-head h2,
+    body[data-variant="C"] .p-offer-head h2{max-width:none;margin-left:0;margin-right:0}
+    body[data-variant="A"] .p-offer-head p,
+    body[data-variant="B"] .p-offer-head p,
+    body[data-variant="C"] .p-offer-head p{margin-left:0;margin-right:0;max-width:none}
+    body[data-variant="A"] .p-offer-card,
+    body[data-variant="B"] .p-offer-card,
+    body[data-variant="C"] .p-offer-card{max-width:none;margin:0;text-align:left}
+    body[data-variant="B"] .p-offer-inner{display:block}
+    body[data-variant="B"] .p-offer-art{width:100%;left:0}
+    body[data-variant="B"] .p-offer::before{background:linear-gradient(180deg,rgba(247,240,230,.9) 0%,rgba(247,240,230,.35) 40%,rgba(247,240,230,.05) 100%)}
+    body[data-variant="C"] .p-offer-card{display:block}
+    body[data-variant="C"] .p-offer-card .price{margin-top:.9rem}
+    body[data-variant="C"] .p-offer-card ul{margin:1.6rem 0 1.8rem}
+    body[data-variant="C"] .p-offer-card .btn{width:100%;margin-top:0}
+  }
+
+  @media(max-width:520px){
+    .p-switcher{bottom:12px;font-size:.68rem}
+    .p-switcher button{width:30px;height:30px}
+    .p-label{min-width:140px}
+    .p-tag{display:none}
+  }
+</style>
+</head>
+<body data-variant="A">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="anillo" d="M200 40C290 45 362 112 355 202C349 290 282 362 192 357C104 352 40 288 46 196C51 110 112 35 200 40Z"/>
+    <symbol id="topo" viewBox="0 0 400 400">
+      <use href="#anillo"/>
+      <use href="#anillo" transform="translate(205 195) rotate(8) scale(.82) translate(-200 -200)"/>
+      <use href="#anillo" transform="translate(212 188) rotate(15) scale(.64) translate(-200 -200)"/>
+      <use href="#anillo" transform="translate(218 182) rotate(24) scale(.47) translate(-200 -200)"/>
+      <use href="#anillo" transform="translate(222 178) rotate(32) scale(.31) translate(-200 -200)"/>
+      <use href="#anillo" transform="translate(224 176) rotate(40) scale(.16) translate(-200 -200)"/>
+    </symbol>
+    <path id="isla" d="M150 330C140 270 175 220 230 205C250 170 300 160 330 175C360 140 420 120 470 130C520 112 580 128 610 160C660 160 720 190 735 235C780 255 800 300 780 345C795 395 760 440 700 450C670 490 610 505 560 492C520 520 455 515 420 488C380 498 330 485 310 455C270 462 230 440 225 405C185 400 150 370 150 330Z"/>
+    <symbol id="marca" viewBox="0 0 30 22"><path d="M3 14c1-6 6-9 11-8 3-4 9-3 11 1 3 3 2 8-2 10-5 3-16 4-20-3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 14c3-3 7-3 11 0" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.2 2.4" stroke-linecap="round"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#FF8F80"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#2E1710" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="destello" viewBox="-6 -6 12 12" overflow="visible"><path d="M0-6C.6-1.2 1.2-.6 6 0 1.2.6.6 1.2 0 6-.6 1.2-1.2.6-6 0-1.2-.6-.6-1.2 0-6z" fill="#FF8F80"/></symbol>
+    <symbol id="ola" viewBox="0 0 24 24"><path d="M1.5 10.5c2.4-3.2 4.8-3.2 7.2 0s4.8 3.2 7.2 0 4.2-2.8 6.6-1.1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M1.5 16.5c2.4-3.2 4.8-3.2 7.2 0s4.8 3.2 7.2 0 4.2-2.8 6.6-1.1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".45"/></symbol>
+    <symbol id="i-campamento" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"><path vector-effect="non-scaling-stroke" d="M6 52h52"/><path vector-effect="non-scaling-stroke" d="M13 52L32 17l19 35"/><path vector-effect="non-scaling-stroke" d="M26 52l6-17 6 17"/><path vector-effect="non-scaling-stroke" d="M32 17V7l8 3-8 3"/><path vector-effect="non-scaling-stroke" d="M20 39L7 47M44 39l13 8"/><path vector-effect="non-scaling-stroke" d="M6 45l2 4M58 45l-2 4"/><path vector-effect="non-scaling-stroke" d="M9 57l1.5-3.5L12 57M50 57l1.5-3.5L53 57M16 57l1-2.5 1 2.5"/></g></symbol>
+    <symbol id="i-sendero" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M3 52L21 24l9 13 11-21 20 36z"/><path vector-effect="non-scaling-stroke" d="M16 31l5 3 3-4M35 27l3 3 3-4 3 4 2-2"/><path vector-effect="non-scaling-stroke" d="M45 26l6 12M43 31l5 10M27 38l4 8" opacity=".6"/><path vector-effect="non-scaling-stroke" d="M22 58c5-4 11-4 13-8s6-8 9-10" stroke-dasharray="1.5 3.5"/><circle vector-effect="non-scaling-stroke" cx="53" cy="11" r="4"/><path vector-effect="non-scaling-stroke" d="M53 3v1.5M61 11h-1.5M58.7 5.3l-1 1"/></g></symbol>
+    <symbol id="i-gruta" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M2 55h60"/><path vector-effect="non-scaling-stroke" d="M6 55C6 31 17 12 32 12s26 19 26 43"/><path vector-effect="non-scaling-stroke" d="M18 55c0-15 6-25 14-25s14 10 14 25"/><path vector-effect="non-scaling-stroke" d="M10 35l8 2M8 45h10M14 24l6 5M54 35l-8 2M56 45H46M50 24l-6 5M32 12v9M23 15l3 7M41 15l-3 7"/><path vector-effect="non-scaling-stroke" d="M24 41c2-1 4-1 5 1M36 47c2-1 4 0 5 1" opacity=".55"/><path vector-effect="non-scaling-stroke" d="M24 55c1-2 4-2 5 0M36 55c1-1.6 3-1.6 4 0"/></g></symbol>
+    <symbol id="i-hoguera" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" d="M32 8c6 8 12 14 12 23a12 12 0 0 1-24 0c0-6 4-10 6-14 1 4 3 6 5 6-1-6 0-10 1-15z"/><path vector-effect="non-scaling-stroke" d="M32 25c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z"/><path vector-effect="non-scaling-stroke" d="M13 54l38-10M13 44l38 10"/><circle vector-effect="non-scaling-stroke" cx="13" cy="44" r="2.2"/><circle vector-effect="non-scaling-stroke" cx="51" cy="44" r="2.2"/><path vector-effect="non-scaling-stroke" d="M6 57c6 3 46 3 52 0"/><path vector-effect="non-scaling-stroke" d="M18 12l.5.5M47 14l.5.5M42 5l.5.5"/></g></symbol>
+    <symbol id="i-barra" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 14h30M9 14v20M31 14v20M5 34h8M27 34h8"/></g></symbol>
+    <symbol id="i-casa" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19L20 8l14 11"/><path d="M10 16v17h20V16"/><path d="M15 33c0-5 2.5-8 5-8s5 3 5 8"/></g></symbol>
+    <symbol id="i-ritmo" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 22c4-8 8-8 12 0s8 8 12 0 6-6 8-3"/></g></symbol>
+    <symbol id="i-comunidad" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="14" cy="15" r="4.5"/><circle cx="26" cy="15" r="4.5"/><path d="M5 32c1-6 5-9 9-9s8 3 9 9M17 32c1-6 5-9 9-9s8 3 9 9"/></g></symbol>
+    <!-- localizador: mini isla para las fichas de cada espacio -->
+    <symbol id="loc-base" viewBox="0 0 82 56"><use href="#isla" transform="scale(.1) translate(-90 -60)" fill="#E8D9BE" stroke="#356B5F" stroke-width="16"/></symbol>
+  </defs>
+</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="tinta" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter><symbol id="copa" viewBox="0 0 26 32" overflow="visible"><path d="M13 31V19" stroke="#A65A44" stroke-width="1.6"/><path d="M13 3c6 0 10 4 10 9 0 5-4 8-10 8S3 17 3 12s4-9 10-9z" fill="#A9D2C3" stroke="#24493F" stroke-width="1.2"/><path d="M8 11c2-3 5-4 8-3M10 15c3 1 6 0 8-2" fill="none" stroke="#24493F" stroke-width=".8" opacity=".5"/></symbol><symbol id="abeto" viewBox="0 0 24 34" overflow="visible"><path d="M12 33V24" stroke="#A65A44" stroke-width="1.6"/><path d="M12 2l7 11h-4l6 10H3l6-10H5z" fill="#8FC6B7" stroke="#24493F" stroke-width="1.2" stroke-linejoin="round"/><path d="M12 9v12" stroke="#24493F" stroke-width=".8" opacity=".5"/></symbol><symbol id="palma" viewBox="0 0 40 60" overflow="visible"><g stroke-linecap="round" fill="none"><path d="M20 58C18 46 22 33 20 20" stroke="#A65A44" stroke-width="2.2"/><path d="M19 50h3M19 42h3M20 34h3" stroke="#24493F" stroke-width=".9"/><g stroke="#24493F" stroke-width="1.6"><path d="M20 20C12 13 6 15 1 22"/><path d="M20 20C14 9 8 7 3 8"/><path d="M20 20C26 9 32 8 37 11"/><path d="M20 20C28 13 34 16 39 23"/><path d="M20 20C20 12 22 6 25 2"/></g></g></symbol><symbol id="velero" viewBox="0 0 34 34" overflow="visible"><path d="M17 2v24" stroke="#24493F" stroke-width="1.2"/><path d="M18 4l12 19H18z" fill="#FAF5ED" stroke="#24493F" stroke-width="1.1"/><path d="M16 8L6 23h10z" fill="#FFD3CB" stroke="#24493F" stroke-width="1.1"/><path d="M3 27h28l-5 6H8z" fill="#A65A44" stroke="#24493F" stroke-width="1"/><path d="M0 34c4-2 8-2 12 0s8 2 12 0 6-1 10 0" fill="none" stroke="#24493F" stroke-width=".9"/></symbol></defs></svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio">LA ISLA</a>
+    <nav aria-label="Navegación">
+      <a href="#iraia">Iraia</a><a href="#mapa">El método</a><a href="#incluye">Qué incluye</a><a href="#faq">Preguntas</a>
+      <a class="btn" href="#oferta">Quiero ir a La Isla →</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="p-offer" id="oferta">
+  <div class="p-offer-art" aria-hidden="true"><svg class="paisaje" viewBox="0 0 1440 1300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#F6E3D2"/></linearGradient>
+      <linearGradient id="agua" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE5D5"/><stop offset="1" stop-color="#93C6B8"/></linearGradient>
+    </defs>
+    <rect width="1440" height="960" fill="url(#cielo)"/>
+    <g transform="translate(0 400)">
+    
+    <g class="sol"><circle cx="1010" cy="556" r="58" fill="#FFCFC4" opacity=".85"/><circle cx="1010" cy="556" r="58" fill="none" stroke="#E8705F" stroke-width="1"/>
+      <path d="M1010 470v-22M950 494l-14-14M1070 494l14-14M928 538h-22M1092 538h22" stroke="#E8705F" stroke-width="1.2" stroke-linecap="round"/></g>
+    <rect y="558" width="1440" height="400" fill="url(#agua)"/>
+    <path d="M0 558h1440" stroke="#356B5F" stroke-width="1" opacity=".55"/>
+    <path d="M960 590h100M975 606h70M990 620h40" stroke="#FAF5ED" stroke-width="2" stroke-linecap="round" class="reflejo"/>
+    <g class="mar-of" fill="none" stroke="#24493F" stroke-width="1.1" stroke-linecap="round" opacity=".45">
+      <path d="M480 610c10-6 20-6 30 0M600 640c10-6 20-6 30 0M820 620c10-6 20-6 30 0M930 670c10-6 20-6 30 0M680 700c10-6 20-6 30 0M520 740c10-6 20-6 30 0M880 760c10-6 20-6 30 0M760 800c10-6 20-6 30 0"/>
+    </g>
+    <g filter="url(#tinta)">
+      <path d="M0 150C80 140 180 150 240 190 280 230 290 300 330 350 370 400 360 470 350 540 380 590 400 650 410 720 420 790 425 850 428 900H0z" fill="#E3CFAD"/>
+      <path d="M0 150C80 140 180 150 240 190 280 230 290 300 330 350 370 400 360 470 350 540 380 590 400 650 410 720 420 790 425 850 428 900" fill="none" stroke="#24493F" stroke-width="1.7"/>
+      <path d="M250 230l40 120M200 260l60 190M300 380l30 140M150 300l50 200M340 600l40 200M260 560l40 240M110 420l40 220" stroke="#24493F" stroke-width=".9" opacity=".45"/>
+      <path d="M408 900c-10-30-6-60 6-84M380 900c-6-20 0-40 10-56" stroke="#24493F" stroke-width="1" fill="none" opacity=".6"/>
+    </g>
+    <g><use href="#copa" x="120" y="96" width="40" height="50"/><use href="#abeto" x="162" y="88" width="34" height="48"/><use href="#copa" x="198" y="118" width="30" height="38"/><use href="#abeto" x="60" y="104" width="28" height="40"/></g>
+    <g filter="url(#tinta)">
+      <path d="M1440 190C1360 180 1260 200 1210 250 1170 300 1170 370 1120 420 1080 460 1080 530 1090 590 1060 640 1040 700 1030 760 1024 810 1020 860 1020 900H1440z" fill="#E3CFAD"/>
+      <path d="M1440 190C1360 180 1260 200 1210 250 1170 300 1170 370 1120 420 1080 460 1080 530 1090 590 1060 640 1040 700 1030 760 1024 810 1020 860 1020 900" fill="none" stroke="#24493F" stroke-width="1.7"/>
+      <path d="M1200 280l-40 140M1250 300l-50 180M1160 440l-30 140M1300 340l-50 220M1110 640l-30 180M1180 620l-40 240M1340 460l-40 260" stroke="#24493F" stroke-width=".9" opacity=".45"/>
+    </g>
+    <g><use href="#abeto" x="1250" y="128" width="34" height="48"/><use href="#copa" x="1290" y="140" width="38" height="48"/><use href="#palma" x="1340" y="118" width="40" height="60"/><use href="#copa" x="1226" y="160" width="28" height="34"/></g>
+    <g class="barco b3"><g class="balanceo"><use href="#velero" x="520" y="526" width="40" height="40"/></g></g>
+    <g class="rama" fill="none" stroke="#356B5F" stroke-width="1.4" stroke-linecap="round">
+      <path d="M300 900C320 820 360 760 430 700"/>
+      <path d="M326 820c-26-6-40-20-44-38 20 2 36 16 44 38z" fill="#CFE5D5"/>
+      <path d="M340 792c22-14 30-34 28-52-16 10-26 28-28 52z" fill="#CFE5D5"/>
+      <path d="M360 762c-24-2-40-14-48-30 20-2 38 10 48 30z" fill="#CFE5D5"/>
+      <path d="M382 740c18-16 24-36 20-52-14 12-22 30-20 52z" fill="#CFE5D5"/>
+      <path d="M406 716c-22 0-38-10-46-24 18-4 36 6 46 24z" fill="#CFE5D5"/>
+      <circle cx="352" cy="776" r="4" fill="#356B5F" stroke="none"/><circle cx="394" cy="730" r="3.5" fill="#356B5F" stroke="none"/>
+    </g>
+  </g>
+  </svg></div>
+  <div class="p-wrap p-offer-inner">
+    <header class="p-offer-head"><p class="eyebrow">Tu sitio en La Isla</p>
+      <h2>Empieza a <em>explorarla hoy.</em></h2>
+      <p>Una práctica de Barre para fortalecer tu cuerpo, mejorar tu técnica y descubrir una forma de movimiento que puedas mantener en tu vida. Una ruta clara, recursos para conocerte mejor y una comunidad con la que compartir el camino.</p></header>
+    <div class="checkout p-offer-card">
+      <p class="tipo">MEMBRESÍA · LA ISLA</p>
+      <span class="pill">Precio de lanzamiento</span>
+      <div class="price">27 €<small>/mes</small></div>
+      <p class="habitual"><s>39 €/mes</s></p>
+      <ul>
+        <li><svg aria-hidden="true"><use href="#check"/></svg><span><strong>Campamento Base:</strong> clase principal mensual de Barre (50–60 min).</span></li>
+        <li><svg aria-hidden="true"><use href="#check"/></svg><span><strong>Sendero:</strong> recurso mensual de hábitos, mentalidad o autocuidado.</span></li>
+        <li><svg aria-hidden="true"><use href="#check"/></svg><span><strong>Gruta:</strong> prácticas breves complementarias.</span></li>
+        <li><svg aria-hidden="true"><use href="#check"/></svg><span><strong>Hoguera:</strong> encuentro mensual en directo.</span></li>
+        <li><svg aria-hidden="true"><use href="#check"/></svg><span>Acceso a la plataforma y a la comunidad.</span></li>
+      </ul>
+      <!-- TODO checkout: sustituir #contacto por la URL de pago -->
+      <a aria-label="Consultar cómo unirse a La Isla" class="btn" href="#contacto">QUIERO MI SITIO EN LA ISLA <span aria-hidden="true">→</span></a>
+      <p class="fine">Cuota mensual, sin permanencia según las condiciones anunciadas.</p>
+      <!-- Nota interna: el botón de pago definitivo está pendiente de configurar. Verificar duración y condiciones del precio promocional antes de publicar. -->
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="p-switcher" role="group" aria-label="Variantes del prototipo de oferta">
+  <button type="button" data-prev aria-label="Variante anterior">←</button>
+  <span class="p-label" data-variant-label aria-live="polite">A · Mesa de expedición</span>
+  <button type="button" data-next aria-label="Variante siguiente">→</button>
+  <span class="p-tag">Prototipo</span>
+</div>
+
+<script>
+(function(){
+  var names={A:'Mesa de expedición',B:'Carta de membresía',C:'Paisaje inmersivo'};
+  var order=['A','B','C'];
+  var params=new URLSearchParams(window.location.search);
+  var current=(params.get('variant')||'A').toUpperCase();
+  if(!names[current]) current='A';
+  function render(){
+    document.body.dataset.variant=current;
+    document.querySelector('[data-variant-label]').textContent=current+' · '+names[current];
+    var url=new URL(window.location.href);
+    url.searchParams.set('variant',current);
+    window.history.replaceState({},'',url);
+    document.title='Prototipo oferta · '+current+' · La Isla v3';
+  }
+  function step(dir){
+    var i=order.indexOf(current);
+    current=order[(i+dir+order.length)%order.length];
+    render();
+  }
+  document.querySelector('[data-prev]').addEventListener('click',function(){step(-1);});
+  document.querySelector('[data-next]').addEventListener('click',function(){step(1);});
+  document.addEventListener('keydown',function(e){
+    var t=e.target;
+    if(t && t.matches('input, textarea, [contenteditable="true"]')) return;
+    if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}
+    if(e.key==='ArrowRight'){e.preventDefault();step(1);}
+  });
+  render();
+})();
+</script>
+</body>
+</html>
